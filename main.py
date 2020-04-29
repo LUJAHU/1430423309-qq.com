@@ -29,7 +29,7 @@ def swing(video_path):
     first_frame, last_frame = get_first_last_frame(video_path)
     img,first_rac_ball, first_points = get_data(first_frame)
     img,last_rac_ball, last_points = get_data(last_frame)
-    res_is_rotate_shoulder, res_is_rotate_arm, res_is_rotate_hip = swing_result(first_points,last_points,
+    res_is_rotate_shoulder, res_is_rotate_arm, res_is_rotate_hip,res_is_downward_rac = swing_result(first_points,last_points,
                                                                      first_rac_ball, last_rac_ball)
     cap = cv.VideoCapture(video_path)
     fourcc = cv.VideoWriter_fourcc(*'XVID')
@@ -37,7 +37,7 @@ def swing(video_path):
     while cap.isOpened():
         hasframe, frame = cap.read()
         if hasframe is True:
-            img = swing_text(frame, res_is_rotate_shoulder, res_is_rotate_arm, res_is_rotate_hip)
+            img = swing_text(frame, res_is_rotate_shoulder, res_is_rotate_arm, res_is_rotate_hip,res_is_downward_rac)
             # img, rac_ball, points = get_data(img)
             cv.imshow('swing', img)
             out.write(img)
