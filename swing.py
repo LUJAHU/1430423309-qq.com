@@ -57,17 +57,28 @@ def is_rotate_hip(first_points,last_points):
         return 1
     else:
         return 0
-
+    
+# detect racket's direction  
+def is_downward_rac(last_points,last_rac_ball):
+    RWrist = last_points[4][1]
+    temp = last_rac_ball['tennis racket']
+    rac = temp[1]+temp[3]/2
+    print("rwrist/rac:",RWrist,rac)
+    if rac > RWrist:
+        return 1
+    else:
+        return 0
 
 def swing_result(first_points,last_points,first_rac_ball,last_rac_ball):
     res_is_rotate_shoulder = is_rotate_shoulder(first_points, last_points, first_rac_ball, last_rac_ball)
     res_is_rotate_arm = is_rotate_arm(first_points, last_points)
     res_is_rotate_hip = is_rotate_hip(first_points, last_points)
-    return res_is_rotate_shoulder,res_is_rotate_arm,res_is_rotate_hip
+    res_is_downward_rac = is_downward_rac(last_points,last_rac_ball)
+    return res_is_rotate_shoulder,res_is_rotate_arm,res_is_rotate_hip,res_is_downward_rac
 
 
 # put text on img
-def swing_text(img, res_is_rotate_shoulder,res_is_rotate_arm,res_is_rotate_hip):
+def swing_text(img, res_is_rotate_shoulder,res_is_rotate_arm,res_is_rotate_hip,res_is_downward_rac):
     right_color = (255, 255, 255)
     wrong_color = (0, 0, 255)
     cv.putText(img, 'Swing Stage', (0, 150), cv.FONT_HERSHEY_COMPLEX, 1, right_color, 2, 4)
@@ -76,14 +87,19 @@ def swing_text(img, res_is_rotate_shoulder,res_is_rotate_arm,res_is_rotate_hip):
     else:
         cv.putText(img, 'Not ebough shoulder rotate', (0, 185), cv.FONT_HERSHEY_COMPLEX, 1, wrong_color, 2, 4)
 
+    if res_is_rotate_hip:
+        cv.putText(img, 'Enough hip rotate', (0, 220), cv.FONT_HERSHEY_COMPLEX, 1, right_color, 2, 4)
+    else:
+        cv.putText(img, 'Not ebough hip rotate', (0, 220), cv.FONT_HERSHEY_COMPLEX, 1, wrong_color, 2, 4)
+        
     if res_is_rotate_arm:
         cv.putText(img, 'Enough arm rotate', (0, 255), cv.FONT_HERSHEY_COMPLEX, 1, right_color, 2, 4)
     else:
         cv.putText(img, 'Not ebough arm rotate', (0, 255), cv.FONT_HERSHEY_COMPLEX, 1, wrong_color, 2, 4)
 
-    if res_is_rotate_hip:
-        cv.putText(img, 'Enough hip rotate', (0, 220), cv.FONT_HERSHEY_COMPLEX, 1, right_color, 2, 4)
+    if res_is_downward_rac == 0:
+        cv.putText(img, 'Upward racket', (0, 290), cv.FONT_HERSHEY_COMPLEX, 1, right_color, 2, 4)
     else:
-        cv.putText(img, 'Not ebough hip rotate', (0, 220), cv.FONT_HERSHEY_COMPLEX, 1, wrong_color, 2, 4)
+        cv.putText(img, 'Not upward racket', (0, 290), cv.FONT_HERSHEY_COMPLEX, 1, wrong_color, 2, 4)
     return img
 
