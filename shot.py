@@ -3,7 +3,6 @@ import cv2 as cv
 import math
 
 
-# calculate distance between two points
 def points_dist(A, B):
     a = np.array(A)
     b = np.array(B)
@@ -11,24 +10,23 @@ def points_dist(A, B):
     return math.hypot(v[0],v[1])
 
 
-# detect whether bend arm
-def is_bend_arm(last_points):
-    RShouder = last_points[2]
-    RElbow = last_points[3]
-    RWrist = last_points[4]
-    r_s_w_dict = points_dist(RShouder, RWrist)
-    r_e = points_dist(RElbow, RShouder) + points_dist(RElbow, RWrist)
-    delta = 5
-    print("bend arm:", r_e, r_s_w_dict)
-    # not bend arm
-    if abs(r_e - r_s_w_dict) > delta:
-        print("bend arm:",r_e,r_s_w_dict)
+# detect whether rotate hip
+def is_rotate_hip(first_points,last_points):
+    f_RHip = first_points[8]
+    f_LHip = first_points[11]
+    f_h_dist = points_dist(f_LHip, f_RHip)
+    l_RHip = last_points[8]
+    l_LHip = last_points[11]
+    l_h_dist = points_dist(l_LHip, l_RHip)
+    print(f_h_dist, l_h_dist)
+    if abs(f_h_dist - l_h_dist) > 20:
+        # enough rotation
         return 1
     else:
         return 0
 
 
-# detect whether suitable shot time
+
 def shot_position(last_points,last_rac_ball):
     chest = last_points[14][1]
     rhip = last_points[8][1]
@@ -43,7 +41,6 @@ def shot_position(last_points,last_rac_ball):
         return 'low'
 
 
-# detect racket's direction
 def is_downward_rac(last_points,last_rac_ball):
     RWrist = last_points[4][1]
     temp = last_rac_ball['tennis racket']
@@ -56,21 +53,20 @@ def is_downward_rac(last_points,last_rac_ball):
 
 
 # put text on img
-def shot_result(img, last_points, last_rac_ball):
-    res_is_bend_arm = is_bend_arm(last_points)
+def shot_result(img, first_points,last_points, last_rac_ball):
+    res_is_rotate_hip = is_rotate_hip(first_points, last_points)
     res_shot_position = shot_position(last_points,last_rac_ball)
     res_is_downward_rac = is_downward_rac(last_points,last_rac_ball)
-    return res_is_bend_arm,res_shot_position,res_is_downward_rac
+    return res_is_rotate_hip,res_shot_position,res_is_downward_rac
 
-
-def shot_text(img,res_is_bend_arm,res_shot_position,res_is_downward_rac):
+def shot_text(img,res_is_rotate_hip,res_shot_position,res_is_downward_rac):
     right_color = (255, 255, 255)
     wrong_color = (0, 0, 255)
     cv.putText(img, 'Shot Stage', (0, 150), cv.FONT_HERSHEY_COMPLEX, 1, right_color, 2, 4)
-    if res_is_bend_arm == 1:
-        cv.putText(img, 'Bend arm', (0, 185), cv.FONT_HERSHEY_COMPLEX, 1, right_color, 2, 4)
+    if res_is_rotate_hip == 1:
+        cv.putText(img, 'Enough hip rotate', (0, 185), cv.FONT_HERSHEY_COMPLEX, 1, right_color, 2, 4)
     else:
-        cv.putText(img, 'Not bend arm', (0, 185), cv.FONT_HERSHEY_COMPLEX, 1, wrong_color, 2, 4)
+        cv.putText(img, 'Not enough hip rotate', (0, 185), cv.FONT_HERSHEY_COMPLEX, 1, wrong_color, 2, 4)
 
     if res_shot_position == 1:
         cv.putText(img, 'Suitable shot position', (0, 220), cv.FONT_HERSHEY_COMPLEX, 1, right_color, 2, 4)
@@ -83,4 +79,5 @@ def shot_text(img,res_is_bend_arm,res_shot_position,res_is_downward_rac):
         cv.putText(img, 'Downward racket', (0, 255), cv.FONT_HERSHEY_COMPLEX, 1, right_color, 2, 4)
     else:
         cv.putText(img, 'Not downward racket', (0, 255), cv.FONT_HERSHEY_COMPLEX, 1, wrong_color, 2, 4)
+
     return img
