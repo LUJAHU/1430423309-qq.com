@@ -87,7 +87,7 @@ def aftershot(video_path):
             img = aftershot_text(frame,res_is_rotate_hip,res_is_wave_rac)
             # img, rac_ball, points = get_data(img)
             cv.imshow('Aftershot', img)
-            # out.write(img)
+            out.write(img)
         else:
             break
         if cv.waitKey(1) & 0xFF == ord('q'):
