@@ -40,8 +40,7 @@ def is_ready_ankle(points):
     LShoulder = points[5]
     ankle_dis = abs(RAnkle[0]-LAnkle[0])
     shoulder_dis = abs(RShouder[0]-LShoulder[0])
-    delta = 10
-    if abs(ankle_dis-shoulder_dis) > delta:
+    if abs(ankle_dis-shoulder_dis) > 50 or abs(ankle_dis-shoulder_dis)<20:
         return 0
     else:
         return 1
