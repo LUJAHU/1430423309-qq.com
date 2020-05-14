@@ -10,6 +10,7 @@ Windows system
 #1. Get Repository
 git clone https://github.com/LUJAHU/tennis_tool.git
 cd tennis_tool
+create file result in directory tennis_tool/ to store result
 
 #2. Download required model
 Because github limits file size, so required models are upload to BaiduYun. 
@@ -27,6 +28,7 @@ pyinstaller -F tennis_action_diagnosis_tool.py
 ### How to use
 ```Python
 #0. Start tool
+Place executable file in directory tennis_tool/dist/ into directory tennis_tool/
 Double click executable file tennis_action_diagnosis_tool.exe and wait a few seconds
 
 #1. Click button browser to select video
