@@ -49,11 +49,12 @@ def swing(video_path):
     cap.release()
     cv.destroyAllWindows()
 
+
 def shot(video_path):
     first_frame, last_frame = get_first_last_frame(video_path)
-    # first_rac_ball, first_points = get_data(first_frame)
+    img,first_rac_ball, first_points = get_data(first_frame)
     img,last_rac_ball, last_points = get_data(last_frame)
-    res_is_bend_arm, res_shot_position, res_is_downward_rac = shot_result(last_frame, last_points, last_rac_ball)
+    res_is_bend_arm, res_shot_position, res_is_downward_rac = shot_result(last_frame, first_points, last_points, last_rac_ball)
     cap = cv.VideoCapture(video_path)
     fourcc = cv.VideoWriter_fourcc(*'XVID')
     out = cv.VideoWriter('./result/shot_result.avi', fourcc, 20.0, (int(cap.get(3)), int(cap.get(4))))
