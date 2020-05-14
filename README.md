@@ -38,6 +38,7 @@ Double click executable file tennis_action_diagnosis_tool.exe and wait a few sec
 
 #3. Click button submit
 
+#4. If you want to quit analysis, press 'q'
 The result video is stored in the directory tennis_tool/result/
 ```
 
