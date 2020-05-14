@@ -27,6 +27,7 @@ pyinstaller -F tennis_action_diagnosis_tool.py
 ```
 
 ### How to use
+You can use videos in the file example to test this tool
 ```Python
 #0. Start tool
 Place executable file in directory tennis_tool/dist/ into directory tennis_tool/
