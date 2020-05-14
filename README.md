@@ -1,5 +1,5 @@
 ![](https://github.com/LUJAHU/tennis_tool/blob/master/icon.ico)
-###Tennis action diagnosis tool
+###Tennis action diagnosis tool<br>
 It is a tool to help amateurs get further improvement in tennis forehand stroke.
 
 ###Requirements
