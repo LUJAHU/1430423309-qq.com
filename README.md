@@ -2,7 +2,7 @@
 ###Tennis action diagnosis tool<br>
 It is a tool to help amateurs get further improvement in tennis forehand stroke.
 
-###Requirements
+###Requirements<br>
 Windows system
 
 ###Installation
@@ -38,7 +38,7 @@ Double click executable file tennis_action_diagnosis_tool.exe and wait a few sec
 The result video is stored in the directory tennis_tool/result/
 ```
 
-###Contact
+###Contact<br>
 Please contact me if you have any questions during use
 
 * Email (1430423309@qq.com)
