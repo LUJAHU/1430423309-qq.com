@@ -1,11 +1,11 @@
 ![](https://github.com/LUJAHU/tennis_tool/blob/master/icon.ico)
-###Tennis action diagnosis tool<br>
+### Tennis action diagnosis tool
 It is a tool to help amateurs get further improvement in tennis forehand stroke.
 
-###Requirements<br>
+### Requirements
 Windows system
 
-###Installation
+### Installation
 ```Python
 #1. Get Repository
 git clone https://github.com/LUJAHU/tennis_tool.git
@@ -24,7 +24,7 @@ pip install pyinstall
 pyinstaller -F tennis_action_diagnosis_tool.py
 ```
 
-###How to use
+### How to use
 ```Python
 #0. Start tool
 Double click executable file tennis_action_diagnosis_tool.exe and wait a few seconds
@@ -38,7 +38,7 @@ Double click executable file tennis_action_diagnosis_tool.exe and wait a few sec
 The result video is stored in the directory tennis_tool/result/
 ```
 
-###Contact<br>
+### Contact
 Please contact me if you have any questions during use
 
 * Email (1430423309@qq.com)
