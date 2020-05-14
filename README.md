@@ -3,6 +3,7 @@
 It is a tool to help amateurs get further improvement in tennis forehand stroke.
 
 ### Requirements
+Pyinstall<br>
 Windows system
 
 ### Installation
